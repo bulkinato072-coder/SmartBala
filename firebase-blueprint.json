@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user information and roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User's unique ID" },
+        "email": { "type": "string", "format": "email", "description": "User's email address" },
+        "displayName": { "type": "string", "description": "User's full name" },
+        "childName": { "type": "string", "description": "Child's name" },
+        "photoURL": { "type": "string", "format": "uri", "description": "Profile photo URL" },
+        "role": { "type": "string", "enum": ["user", "specialist"], "description": "User's role in the app" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["uid", "email", "displayName", "role", "createdAt"]
+    },
+    "Progress": {
+      "title": "Child Progress",
+      "description": "30-day progress tracking for children.",
+      "type": "object",
+      "properties": {
+        "completedDays": { 
+          "type": "object", 
+          "description": "Map of day numbers to completion status and notes"
+        },
+        "lastUpdated": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["completedDays", "lastUpdated"]
+    },
+    "Feedback": {
+      "title": "Feedback and Q&A",
+      "description": "Stores questions submitted by parents and answers from specialists.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique ID for the feedback" },
+        "userId": { "type": "string", "description": "ID of the user who asked the question" },
+        "userName": { "type": "string", "description": "Name of the user who asked the question" },
+        "age": { "type": "string", "description": "Child's age" },
+        "type": { "type": "string", "enum": ["Мінез", "Сөйлеу", "Сенсорика", "Әлеуметтік"], "description": "Type of issue" },
+        "description": { "type": "string", "description": "Description of the situation" },
+        "status": { "type": "string", "enum": ["pending", "answered"], "description": "Status of the question" },
+        "answer": { "type": "string", "description": "Answer from the specialist" },
+        "specialistId": { "type": "string", "description": "ID of the specialist who answered" },
+        "specialistName": { "type": "string", "description": "Name of the specialist who answered" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the question was asked" },
+        "answeredAt": { "type": "string", "format": "date-time", "description": "When the question was answered" },
+        "helped": { "type": "boolean", "description": "Whether the answer helped the user" },
+        "isSaved": { "type": "boolean", "description": "Whether the user saved this answer" }
+      },
+      "required": ["userId", "age", "type", "description", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/progress/{userId}": {
+      "schema": "Progress",
+      "description": "Progress tracking for the 30-day program."
+    },
+    "/feedback/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "Feedback and Q&A collection."
+    }
+  }
+}
