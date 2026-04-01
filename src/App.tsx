@@ -92,14 +92,15 @@ export default function App() {
   const [isAuthLoading, setIsAuthLoading] = useState(false);
 
   useEffect(() => {
-    const completedKeys = Object.keys(completedDays).map(Number);
+    const completedKeys = Object.keys(completedDays)
+      .map(Number)
+      .filter(day => completedDays[day]?.completed);
     const lastCompleted = completedKeys.length > 0 ? Math.max(...completedKeys) : 0;
     const nextDay = Math.min(lastCompleted + 1, 30);
     setCurrentDay(nextDay);
-    // Only auto-set selectedDay if it's the first load or if we just completed the current selected day
+    // Only auto-set selectedDay if it's the first load
     setSelectedDay(prev => {
       if (prev === 1 && lastCompleted === 0) return 1;
-      if (completedDays[prev]?.completed && prev < 30) return prev + 1;
       return prev;
     });
   }, [completedDays]);
