@@ -36,33 +36,33 @@ export default function SosSection() {
   };
 
   return (
-    <div className="space-y-8 pb-20">
+    <div className="space-y-12 pb-20">
       {/* Header Section */}
-      <div className="space-y-6">
-        <h2 className="section-title">{SOS_CONTENT.title}</h2>
+      <div className="space-y-8">
+        <h2 className="text-4xl md:text-5xl font-serif font-black text-brand-olive tracking-tight uppercase">{SOS_CONTENT.title}</h2>
         
-        <div className="bg-red-50 p-6 rounded-[32px] border border-red-100 space-y-4">
-          <div className="flex gap-3 items-center text-red-600">
-            <AlertCircle size={24} />
-            <h3 className="font-bold text-lg">{SOS_CONTENT.subtitle}</h3>
+        <div className="bg-red-50 p-8 rounded-[40px] border-2 border-red-100 space-y-6 shadow-xl shadow-red-900/5">
+          <div className="flex gap-4 items-center text-red-600">
+            <AlertCircle size={32} />
+            <h3 className="font-black text-2xl md:text-3xl leading-tight">{SOS_CONTENT.subtitle}</h3>
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-4">
             {SOS_CONTENT.principles.map((p, i) => (
-              <p key={i} className="flex items-center gap-2 text-red-900 font-medium">
-                <span className="text-red-500">❗</span> {p}
+              <p key={i} className="flex items-start gap-3 text-red-900 text-xl md:text-2xl font-black leading-tight">
+                <span className="text-red-500 shrink-0">❗</span> {p}
               </p>
             ))}
           </div>
 
-          <div className="bg-white/50 p-4 rounded-2xl space-y-3">
-            <p className="text-sm text-slate-700 leading-relaxed">
+          <div className="bg-white/60 backdrop-blur-sm p-6 rounded-3xl space-y-6 border border-white/20">
+            <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
               {SOS_CONTENT.intro}
             </p>
-            <ul className="grid grid-cols-2 gap-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {["жылай бастаса", "айқайласа", "тыңдамаса", "өзін ұстай алмаса"].map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-xs text-slate-500">
-                  <div className="w-1 h-1 rounded-full bg-red-400" />
+                <li key={i} className="flex items-center gap-3 text-base md:text-lg text-slate-600 font-bold bg-white/40 p-3 rounded-2xl">
+                  <div className="w-2 h-2 rounded-full bg-red-400 shrink-0" />
                   {item}
                 </li>
               ))}
@@ -72,36 +72,36 @@ export default function SosSection() {
       </div>
 
       {/* Situations List */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between px-2">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Жағдайлар тізімі:</p>
-          <div className="text-[10px] font-bold text-brand-olive bg-brand-cream px-3 py-1 rounded-full">
+      <div className="space-y-6">
+        <div className="flex items-center justify-between px-4">
+          <p className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Жағдайлар тізімі:</p>
+          <div className="text-sm font-black text-brand-olive bg-brand-cream px-4 py-2 rounded-full shadow-sm">
             {usedIds.size} / {SOS_CONTENT.situations.length} қолданылды
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {SOS_CONTENT.situations.map((sit) => (
             <button
               key={sit.id}
               onClick={() => setSelectedId(sit.id)}
               className={cn(
-                "w-full p-4 rounded-[24px] text-left transition-all flex items-center justify-between group bg-white border border-slate-100 hover:border-brand-olive/30 shadow-sm hover:shadow-md active:scale-[0.98]"
+                "w-full p-6 rounded-[32px] text-left transition-all flex items-center justify-between group bg-white border-2 border-slate-100 hover:border-brand-olive/30 shadow-md hover:shadow-xl active:scale-[0.98]"
               )}
             >
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 bg-brand-cream text-brand-olive group-hover:bg-brand-olive group-hover:text-white transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg shrink-0 bg-brand-cream text-brand-olive group-hover:bg-brand-olive group-hover:text-white transition-all shadow-inner">
                   {sit.id}
                 </div>
-                <span className="font-bold text-sm text-slate-700 line-clamp-1">{sit.title}</span>
+                <span className="font-black text-lg md:text-xl text-slate-700 leading-tight">{sit.title}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 {usedIds.has(sit.id) && (
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center bg-green-100 text-green-600">
-                    <CheckCircle2 size={12} />
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-green-100 text-green-600 shadow-sm">
+                    <CheckCircle2 size={20} />
                   </div>
                 )}
-                <ChevronDown size={14} className="-rotate-90 text-slate-300 group-hover:text-brand-olive transition-colors" />
+                <ChevronDown size={24} className="-rotate-90 text-slate-300 group-hover:text-brand-olive transition-colors" />
               </div>
             </button>
           ))}
@@ -169,50 +169,50 @@ export default function SosSection() {
               </div>
 
               {/* Modal Body */}
-              <div className="relative p-8 sm:p-10 overflow-y-auto space-y-10 custom-scrollbar flex-1">
+              <div className="relative p-8 sm:p-10 overflow-y-auto space-y-12 custom-scrollbar flex-1">
                 {/* What's happening */}
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="space-y-4"
+                  className="space-y-6"
                 >
-                  <div className="flex items-center gap-3 text-brand-accent">
-                    <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center">
-                      <Info size={18} />
+                  <div className="flex items-center gap-4 text-brand-accent px-2">
+                    <div className="w-10 h-10 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                      <Info size={24} />
                     </div>
-                    <p className="text-xs font-bold uppercase tracking-widest">Не болып жатыр:</p>
+                    <p className="text-sm font-black uppercase tracking-[0.2em]">Не болып жатыр:</p>
                   </div>
-                  <div className="bg-brand-cream/40 p-6 rounded-[32px] border border-brand-cream relative overflow-hidden">
+                  <div className="bg-brand-cream/40 p-8 rounded-[40px] border-2 border-brand-cream relative overflow-hidden shadow-inner">
                     <div className="absolute top-0 right-0 p-4 opacity-5">
-                      <Heart size={80} />
+                      <Heart size={100} />
                     </div>
-                    <p className="text-slate-700 leading-relaxed italic text-lg relative z-10">
+                    <p className="text-slate-700 leading-relaxed italic text-xl md:text-2xl font-medium relative z-10">
                       «{selectedSituation.happening}»
                     </p>
                   </div>
                 </motion.div>
 
                 {/* To Do */}
-                <div className="space-y-5">
-                  <div className="flex items-center gap-3 text-green-600 px-2">
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                      <ThumbsUp size={18} />
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4 text-green-600 px-2">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                      <ThumbsUp size={24} />
                     </div>
-                    <p className="text-xs font-bold uppercase tracking-widest">Не істеу керек:</p>
+                    <p className="text-sm font-black uppercase tracking-[0.2em]">Не істеу керек:</p>
                   </div>
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {selectedSituation.todo.map((item, i) => (
                       <motion.li 
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.1 + i * 0.1 }}
                         key={i} 
-                        className="flex items-start gap-4 text-slate-700 bg-green-50/50 p-5 rounded-[28px] border border-green-100/50 hover:bg-green-50 transition-all hover:translate-x-1"
+                        className="flex items-start gap-5 text-slate-700 bg-green-50/50 p-6 rounded-[32px] border-2 border-green-100/50 hover:bg-green-50 transition-all hover:translate-x-2 shadow-sm"
                       >
-                        <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-md shadow-green-200">
-                          <CheckCircle2 size={16} />
+                        <div className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-lg shadow-green-200">
+                          <CheckCircle2 size={24} />
                         </div>
-                        <span className="font-medium text-base leading-snug">{item}</span>
+                        <span className="font-black text-lg md:text-xl leading-snug">{item}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -220,26 +220,26 @@ export default function SosSection() {
 
                 {/* Not To Do */}
                 {selectedSituation.notodo && (
-                  <div className="space-y-5">
-                    <div className="flex items-center gap-3 text-red-500 px-2">
-                      <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
-                        <XCircle size={18} />
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4 text-red-500 px-2">
+                      <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                        <XCircle size={24} />
                       </div>
-                      <p className="text-xs font-bold uppercase tracking-widest">Болмайды:</p>
+                      <p className="text-sm font-black uppercase tracking-[0.2em]">Болмайды:</p>
                     </div>
-                    <ul className="space-y-3">
+                    <ul className="space-y-4">
                       {selectedSituation.notodo.map((item, i) => (
                         <motion.li 
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.3 + (selectedSituation.todo.length + i) * 0.1 }}
                           key={i} 
-                          className="flex items-start gap-4 text-slate-700 bg-red-50/50 p-5 rounded-[28px] border border-red-100/50 hover:bg-red-50 transition-all hover:translate-x-1"
+                          className="flex items-start gap-5 text-slate-700 bg-red-50/50 p-6 rounded-[32px] border-2 border-red-100/50 hover:bg-red-50 transition-all hover:translate-x-2 shadow-sm"
                         >
-                          <div className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-md shadow-red-200">
-                            <XCircle size={16} />
+                          <div className="w-10 h-10 rounded-full bg-red-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-lg shadow-red-200">
+                            <XCircle size={24} />
                           </div>
-                          <span className="font-medium text-base leading-snug">{item}</span>
+                          <span className="font-black text-lg md:text-xl leading-snug">{item}</span>
                         </motion.li>
                       ))}
                     </ul>
@@ -280,48 +280,48 @@ export default function SosSection() {
       </AnimatePresence>
 
       {/* Conclusion */}
-      <div className="bg-brand-olive text-white p-8 rounded-[40px] space-y-8 relative overflow-hidden">
+      <div className="bg-brand-olive text-white p-10 md:p-12 rounded-[50px] space-y-10 relative overflow-hidden shadow-2xl shadow-brand-olive/20">
         <div className="absolute top-0 right-0 p-6 opacity-10">
-          <Sparkles size={120} />
+          <Sparkles size={160} />
         </div>
         
-        <div className="space-y-4 relative z-10">
-          <h3 className="text-2xl font-serif">SOS қорытындысы:</h3>
-          <div className="space-y-3">
+        <div className="space-y-6 relative z-10">
+          <h3 className="text-3xl md:text-4xl font-serif font-black tracking-tight uppercase">SOS қорытындысы:</h3>
+          <div className="space-y-4">
             {SOS_CONTENT.conclusion.principles.map((p, i) => (
-              <div key={i} className="flex items-center gap-3 bg-white/10 p-4 rounded-2xl border border-white/5">
-                <span className="text-brand-cream">❗</span>
-                <p className="text-sm font-medium">{p}</p>
+              <div key={i} className="flex items-center gap-4 bg-white/10 p-6 rounded-3xl border-2 border-white/5 backdrop-blur-sm">
+                <span className="text-brand-cream text-3xl leading-none">❗</span>
+                <p className="text-lg md:text-xl font-black leading-tight">{p}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm p-6 rounded-3xl border border-white/5 space-y-4 relative z-10">
-          <p className="text-sm leading-relaxed italic text-white/90">
+        <div className="bg-white/10 backdrop-blur-md p-8 rounded-[40px] border-2 border-white/5 space-y-6 relative z-10 shadow-inner">
+          <p className="text-lg md:text-xl leading-relaxed italic text-white/90 font-medium">
             {SOS_CONTENT.conclusion.message}
           </p>
         </div>
 
-        <div className="text-center space-y-2 pt-4 relative z-10">
-          <p className="text-xl font-serif italic">Сіз жалғыз емессіз!</p>
-          <p className="text-sm text-white/70">Әр қиын сәт – дамудың бір бөлігі!</p>
+        <div className="text-center space-y-4 pt-6 relative z-10">
+          <p className="text-3xl md:text-4xl font-serif italic font-black">Сіз жалғыз емессіз!</p>
+          <p className="text-lg md:text-xl text-white/70 font-bold tracking-wide uppercase">Әр қиын сәт – дамудың бір бөлігі!</p>
         </div>
       </div>
 
       {/* Emergency Contacts */}
-      <div className="space-y-4">
-        <h3 className="text-xl font-serif text-brand-olive px-2">Көмек қажет болса:</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="space-y-8">
+        <h3 className="text-3xl md:text-4xl font-serif font-black text-brand-olive px-4 uppercase tracking-tight">Көмек қажет болса:</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {SOS_CONTACTS.map((contact, idx) => (
-            <div key={idx} className="card-organic flex items-center gap-6 border-2 border-transparent hover:border-red-200 transition-all">
-              <div className="w-14 h-14 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center shrink-0">
-                <PhoneCall size={24} />
+            <div key={idx} className="card-organic p-8 flex flex-col sm:flex-row items-center gap-8 border-4 border-transparent hover:border-red-200 transition-all shadow-xl">
+              <div className="w-20 h-20 bg-red-100 text-red-600 rounded-3xl flex items-center justify-center shrink-0 shadow-inner">
+                <PhoneCall size={40} />
               </div>
-              <div className="flex-1">
-                <h4 className="font-bold text-slate-800">{contact.name}</h4>
-                <p className="text-xs text-slate-500 mb-2">{contact.desc}</p>
-                <a href={`tel:${contact.phone}`} className="text-xl font-serif font-bold text-red-600">{contact.phone}</a>
+              <div className="flex-1 text-center sm:text-left space-y-2">
+                <h4 className="font-black text-2xl text-slate-800 leading-tight">{contact.name}</h4>
+                <p className="text-base text-slate-500 font-medium">{contact.desc}</p>
+                <a href={`tel:${contact.phone}`} className="inline-block text-3xl md:text-4xl font-serif font-black text-red-600 hover:scale-105 transition-transform">{contact.phone}</a>
               </div>
             </div>
           ))}
