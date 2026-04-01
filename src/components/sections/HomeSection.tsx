@@ -199,23 +199,39 @@ export default function HomeSection() {
         </div>
       </section>
 
-      {/* SOS Emergency Help */}
+      {/* SOS List */}
       <section className="snap-start scroll-mt-20 md:scroll-mt-0 min-h-[85vh] md:min-h-0 flex flex-col justify-center">
-        <div className="mx-2 p-6 md:p-8 rounded-[32px] bg-red-50 border border-red-100 space-y-4">
-        <div className="flex items-center gap-3 text-red-600">
-          <ShieldCheck size={32} />
-          <h4 className="font-serif font-black text-2xl md:text-3xl">SOS жедел көмек</h4>
-        </div>
-        <div className="space-y-3">
-          <div className="p-5 bg-white rounded-2xl border border-red-100">
-            <h5 className="font-black text-xl text-red-700 mb-2">SOS тізімі:</h5>
-            <p className="text-base md:text-lg text-slate-600">Күрделі мінез-құлық кезіндегі алгоритмдер, қауіпсіздік шаралары және жедел әрекет ету жоспары.</p>
+        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-red-50 border-2 border-red-100 shadow-xl space-y-6">
+          <div className="flex items-center gap-4 text-red-600">
+            <ShieldCheck size={40} />
+            <h4 className="font-serif font-black text-3xl md:text-4xl leading-tight">SOS тізімі</h4>
           </div>
-          <div className="p-5 bg-white rounded-2xl border border-red-100">
-            <h5 className="font-black text-xl text-red-700 mb-2">SOS қорытынды:</h5>
-            <p className="text-base md:text-lg text-slate-600">Оқиғадан кейінгі талдау, баланың күйін тұрақтандыру және болашақта алдын алу шаралары.</p>
+          <div className="p-6 bg-white rounded-[32px] border-2 border-red-100 shadow-sm">
+            <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-black mb-4">
+              Күрделі мінез-құлық кезіндегі алгоритмдер:
+            </p>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+              Қауіпсіздік шаралары, жедел әрекет ету жоспары және баланың күйін бақылау нұсқаулықтары.
+            </p>
           </div>
         </div>
+      </section>
+
+      {/* SOS Conclusion */}
+      <section className="snap-start scroll-mt-20 md:scroll-mt-0 min-h-[85vh] md:min-h-0 flex flex-col justify-center">
+        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-red-50 border-2 border-red-100 shadow-xl space-y-6">
+          <div className="flex items-center gap-4 text-red-600">
+            <ShieldCheck size={40} />
+            <h4 className="font-serif font-black text-3xl md:text-4xl leading-tight">SOS қорытынды</h4>
+          </div>
+          <div className="p-6 bg-white rounded-[32px] border-2 border-red-100 shadow-sm">
+            <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-black mb-4">
+              Оқиғадан кейінгі талдау:
+            </p>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+              Баланың күйін тұрақтандыру, себептерді анықтау және болашақта алдын алу шаралары.
+            </p>
+          </div>
         </div>
       </section>
 
