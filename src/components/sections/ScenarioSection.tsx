@@ -110,10 +110,10 @@ export default function ScenarioSection({
 
   if (isCompleted) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Day Navigation */}
-        <div className="bg-white rounded-3xl p-4 shadow-sm border border-slate-100 overflow-x-auto scrollbar-hide">
-          <div className="flex gap-2 min-w-max px-2">
+        <div className="bg-white rounded-[32px] p-6 shadow-md border-2 border-slate-100 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-4 min-w-max px-2">
             {[...Array(30)].map((_, i) => {
               const dayNum = i + 1;
               const isCompleted = completedDays[dayNum]?.completed;
@@ -130,22 +130,22 @@ export default function ScenarioSection({
                   disabled={isFuture}
                   onClick={() => setSelectedDay(dayNum)}
                   className={cn(
-                    "w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all shrink-0 relative",
+                    "w-14 h-14 rounded-2xl flex flex-col items-center justify-center transition-all shrink-0 relative border-2",
                     isSelected 
-                      ? "bg-brand-olive text-white shadow-lg shadow-brand-olive/20 scale-110 z-10" 
+                      ? "bg-brand-olive text-white border-brand-olive shadow-xl shadow-brand-olive/20 scale-110 z-10" 
                       : isFuture
-                        ? "bg-slate-100 text-slate-300 cursor-not-allowed"
-                        : "bg-slate-50 text-slate-400 hover:bg-slate-100"
+                        ? "bg-slate-100 text-slate-300 border-slate-100 cursor-not-allowed"
+                        : "bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100"
                   )}
                 >
-                  <span className="text-[10px] font-bold leading-none mb-0.5">{dayNum}</span>
+                  <span className="text-sm font-black leading-none mb-1">{dayNum}</span>
                   {isCompleted && (
-                    <CheckCircle2 size={10} className={isSelected ? "text-white" : "text-green-500"} />
+                    <CheckCircle2 size={14} className={isSelected ? "text-white" : "text-green-500"} />
                   )}
                   {isSelected && (
                     <motion.div 
                       layoutId="activeDay"
-                      className="absolute -bottom-1 w-1 h-1 bg-white rounded-full"
+                      className="absolute -bottom-1 w-2 h-2 bg-white rounded-full"
                     />
                   )}
                 </button>
@@ -154,22 +154,24 @@ export default function ScenarioSection({
           </div>
         </div>
 
-        <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 text-center">
-          <div className="w-20 h-20 bg-brand-olive/10 rounded-full flex items-center justify-center mx-auto mb-6">
+        <div className="bg-white rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 shadow-xl border-2 border-slate-100 text-center space-y-8">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 bg-brand-olive/10 rounded-full flex items-center justify-center mx-auto shadow-inner">
             <CheckCircle2 size={40} className="text-brand-olive" />
           </div>
-          <h3 className="text-2xl font-serif text-brand-olive mb-4">Бүгінгі тапсырма орындалды!</h3>
-          <p className="text-slate-600 mb-8">
-            Сіз бүгінгі тапсырманы сәтті аяқтадыңыз. Ертең жаңа тапсырма ашылады.
-          </p>
+          <div className="space-y-4">
+            <h3 className="text-3xl sm:text-4xl font-serif font-black text-brand-olive leading-tight">Бүгінгі тапсырма орындалды!</h3>
+            <p className="text-lg sm:text-2xl text-slate-600 leading-relaxed font-medium">
+              Сіз бүгінгі тапсырманы сәтті аяқтадыңыз. Ертең жаңа тапсырма ашылады.
+            </p>
+          </div>
 
-          <div className="space-y-4 text-left">
+          <div className="space-y-4 sm:space-y-6 text-left">
             {scenario?.support && (
-              <div className="p-6 rounded-3xl bg-brand-olive/5 border border-brand-olive/10 flex items-start gap-4">
-                <Heart size={24} className="text-brand-olive shrink-0" />
-                <div>
-                  <p className="text-xs font-bold text-brand-olive uppercase tracking-widest mb-1">Қолдау:</p>
-                  <p className="text-sm text-slate-600 italic leading-relaxed">
+              <div className="px-5 py-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-brand-olive/5 border-2 border-brand-olive/10 flex items-start gap-4 sm:gap-6 shadow-sm">
+                <Heart size={28} className="text-brand-olive shrink-0 mt-1" />
+                <div className="space-y-1">
+                  <p className="text-[10px] sm:text-sm font-black text-brand-olive uppercase tracking-[0.2em]">Қолдау:</p>
+                  <p className="text-lg sm:text-2xl text-slate-600 italic font-medium leading-relaxed">
                     {scenario.support}
                   </p>
                 </div>
@@ -177,11 +179,11 @@ export default function ScenarioSection({
             )}
 
             {scenario?.motivation && (
-              <div className="p-6 rounded-3xl bg-brand-accent/5 border border-brand-accent/10 flex items-start gap-4">
-                <Sparkles size={24} className="text-brand-accent shrink-0" />
-                <div>
-                  <p className="text-xs font-bold text-brand-accent uppercase tracking-widest mb-1">Мотивация:</p>
-                  <p className="text-sm text-slate-600 italic leading-relaxed">
+              <div className="px-5 py-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-brand-accent/5 border-2 border-brand-accent/10 flex items-start gap-4 sm:gap-6 shadow-sm">
+                <Sparkles size={28} className="text-brand-accent shrink-0 mt-1" />
+                <div className="space-y-1">
+                  <p className="text-[10px] sm:text-sm font-black text-brand-accent uppercase tracking-[0.2em]">Мотивация:</p>
+                  <p className="text-lg sm:text-2xl text-slate-600 italic font-medium leading-relaxed">
                     {scenario.motivation}
                   </p>
                 </div>
@@ -190,17 +192,87 @@ export default function ScenarioSection({
           </div>
         </div>
 
-        {/* Weekly Progress Section */}
-        <div className="p-6 rounded-[32px] bg-white border border-slate-100 shadow-sm">
-          <button 
-            onClick={() => setShowWeeklyProgress(!showWeeklyProgress)}
-            className="w-full flex items-center justify-between mb-2"
-          >
-            <div className="flex items-center gap-2">
-              <Calendar size={18} className="text-brand-olive" />
-              <h4 className="text-xs font-bold text-brand-olive uppercase tracking-widest">Апталық прогресс</h4>
+        {/* Weekly Progress Section - BIG AND LOUD */}
+        <div className="px-4 py-8 sm:p-10 rounded-[40px] sm:rounded-[50px] bg-brand-cream border-4 border-brand-olive/20 shadow-2xl relative overflow-hidden">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-olive/5 rounded-full blur-3xl" />
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-accent/5 rounded-full blur-3xl" />
+          
+          <div className="relative z-10 space-y-6 sm:space-y-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-olive text-white flex items-center justify-center shadow-lg shadow-brand-olive/20">
+                  <Calendar size={24} sm:size={32} />
+                </div>
+                <h4 className="text-xl sm:text-2xl font-black text-brand-olive uppercase tracking-tight">Апталық прогресс</h4>
+              </div>
+              {(() => {
+                const currentWeek = Math.ceil(currentDay / 7);
+                const weekStart = (currentWeek - 1) * 7 + 1;
+                const weekEnd = Math.min(currentWeek * 7, 30);
+                let completedInWeek = 0;
+                for (let d = weekStart; d <= weekEnd; d++) {
+                  if (completedDays[d]?.completed) completedInWeek++;
+                }
+                const percentage = Math.round((completedInWeek / (weekEnd - weekStart + 1)) * 100);
+                return (
+                  <div className="flex flex-row sm:flex-col items-center sm:items-end gap-3 sm:gap-2">
+                    <span className="text-2xl sm:text-3xl font-black text-brand-olive bg-white px-4 sm:px-6 py-1 sm:py-2 rounded-xl sm:rounded-2xl shadow-sm border-2 border-brand-olive/10">
+                      {completedInWeek}/{weekEnd - weekStart + 1}
+                    </span>
+                    <p className="text-[10px] sm:text-sm font-black text-brand-olive/60 uppercase tracking-widest">{percentage}% ОРЫНДАЛДЫ</p>
+                  </div>
+                );
+              })()}
             </div>
-            <div className="flex items-center gap-2">
+
+            <div className="grid grid-cols-1 gap-2 sm:gap-3">
+              {(() => {
+                const currentWeek = Math.ceil(currentDay / 7);
+                const weekStart = (currentWeek - 1) * 7 + 1;
+                const weekEnd = Math.min(currentWeek * 7, 30);
+                const weekRows = [];
+
+                for (let d = weekStart; d <= weekEnd; d++) {
+                  const isCompleted = completedDays[d]?.completed;
+                  const dayScenario = DAILY_SCENARIOS.find(s => s.day === d);
+                  const isCurrent = d === currentDay;
+                  
+                  weekRows.push(
+                    <div 
+                      key={d} 
+                      className={cn(
+                        "grid grid-cols-[60px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-center p-3 sm:p-5 rounded-[20px] sm:rounded-[28px] transition-all border-2",
+                        isCurrent 
+                          ? "bg-brand-olive text-white border-brand-olive shadow-xl scale-[1.02] z-10" 
+                          : isCompleted
+                            ? "bg-white text-slate-700 border-green-100 shadow-sm"
+                            : "bg-white/50 text-slate-400 border-slate-100"
+                      )}
+                    >
+                      <span className={cn("text-[10px] sm:text-xs font-black uppercase tracking-widest", isCurrent ? "text-white/80" : "text-slate-400")}>
+                        {d}-күн
+                      </span>
+                      <span className={cn("text-base sm:text-lg font-black px-2 sm:px-4 leading-tight", isCurrent ? "text-white" : "text-slate-700")}>
+                        {dayScenario?.category || "-"}
+                      </span>
+                      <div className="flex justify-center">
+                        {isCompleted ? (
+                          <CheckCircle2 size={24} sm:size={28} className={isCurrent ? "text-white" : "text-green-500"} />
+                        ) : d < currentDay ? (
+                          <XCircle size={24} sm:size={28} className={isCurrent ? "text-white/50" : "text-red-400"} />
+                        ) : (
+                          <Circle size={24} sm:size={28} className={isCurrent ? "text-white/30" : "text-slate-200"} />
+                        )}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return weekRows;
+              })()}
+            </div>
+
+            <div className="pt-4 sm:pt-6 border-t-2 border-brand-olive/10">
               {(() => {
                 const currentWeek = Math.ceil(currentDay / 7);
                 const weekStart = (currentWeek - 1) * 7 + 1;
@@ -210,66 +282,18 @@ export default function ScenarioSection({
                   if (completedDays[d]?.completed) completedInWeek++;
                 }
                 return (
-                  <span className="text-[10px] font-bold bg-brand-cream text-brand-olive px-3 py-1 rounded-full">
-                    {completedInWeek}/{weekEnd - weekStart + 1}
-                  </span>
+                  <div className="text-center space-y-1 sm:space-y-2">
+                    <p className="text-xl sm:text-2xl font-serif italic font-black text-brand-olive">
+                      Апта ішінде барлығы {completedInWeek}/{weekEnd - weekStart + 1} тапсырма орындалды
+                    </p>
+                    <p className="text-[10px] sm:text-sm font-black text-brand-olive/50 uppercase tracking-[0.3em]">Сіз кереметсіз!</p>
+                  </div>
                 );
               })()}
-              <ChevronRight size={16} className={cn("text-brand-olive transition-transform", showWeeklyProgress && "rotate-90")} />
             </div>
-          </button>
-
-          {showWeeklyProgress && (
-            <motion.div 
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              className="overflow-hidden"
-            >
-              <div className="space-y-1 pt-4">
-                {(() => {
-                  const currentWeek = Math.ceil(currentDay / 7);
-                  const weekStart = (currentWeek - 1) * 7 + 1;
-                  const weekEnd = Math.min(currentWeek * 7, 30);
-                  const weekRows = [];
-
-                  for (let d = weekStart; d <= weekEnd; d++) {
-                    const isCompleted = completedDays[d]?.completed;
-                    const dayScenario = DAILY_SCENARIOS.find(s => s.day === d);
-                    const isCurrent = d === currentDay;
-                    
-                    weekRows.push(
-                      <div 
-                        key={d} 
-                        className={cn(
-                          "grid grid-cols-[60px_1fr_40px] items-center p-3 rounded-xl transition-colors",
-                          isCurrent ? "bg-brand-olive text-white" : "hover:bg-slate-50 border-b border-slate-50 last:border-0"
-                        )}
-                      >
-                        <span className={cn("text-[10px] font-bold uppercase", isCurrent ? "text-white/70" : "text-slate-400")}>
-                          {d}-күн
-                        </span>
-                        <span className={cn("text-xs font-medium truncate px-2", isCurrent ? "text-white" : "text-slate-600")}>
-                          {dayScenario?.category || "-"}
-                        </span>
-                        <div className="flex justify-center">
-                          {isCompleted ? (
-                            <CheckCircle2 size={16} className={isCurrent ? "text-white" : "text-green-500"} />
-                          ) : d < currentDay ? (
-                            <XCircle size={16} className={isCurrent ? "text-white/50" : "text-red-400"} />
-                          ) : (
-                            <Circle size={16} className={isCurrent ? "text-white/30" : "text-slate-200"} />
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-
-                  return weekRows;
-                })()}
-              </div>
-            </motion.div>
-          )}
+          </div>
         </div>
+
       </div>
     );
   }
@@ -277,8 +301,8 @@ export default function ScenarioSection({
   return (
     <div className="space-y-6">
       {/* Day Navigation */}
-      <div className="bg-white rounded-3xl p-4 shadow-sm border border-slate-100 overflow-x-auto scrollbar-hide">
-        <div className="flex gap-2 min-w-max px-2">
+      <div className="bg-white rounded-[32px] p-6 shadow-md border-2 border-slate-100 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-4 min-w-max px-2">
           {[...Array(30)].map((_, i) => {
             const dayNum = i + 1;
             const isCompleted = completedDays[dayNum]?.completed;
@@ -295,22 +319,22 @@ export default function ScenarioSection({
                 disabled={isFuture}
                 onClick={() => setSelectedDay(dayNum)}
                 className={cn(
-                  "w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all shrink-0 relative",
+                  "w-14 h-14 rounded-2xl flex flex-col items-center justify-center transition-all shrink-0 relative border-2",
                   isSelected 
-                    ? "bg-brand-olive text-white shadow-lg shadow-brand-olive/20 scale-110 z-10" 
+                    ? "bg-brand-olive text-white border-brand-olive shadow-xl shadow-brand-olive/20 scale-110 z-10" 
                     : isFuture
-                      ? "bg-slate-100 text-slate-300 cursor-not-allowed"
-                      : "bg-slate-50 text-slate-400 hover:bg-slate-100"
+                      ? "bg-slate-100 text-slate-300 border-slate-100 cursor-not-allowed"
+                      : "bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100"
                 )}
               >
-                <span className="text-[10px] font-bold leading-none mb-0.5">{dayNum}</span>
+                <span className="text-sm font-black leading-none mb-1">{dayNum}</span>
                 {isCompleted && (
-                  <CheckCircle2 size={10} className={isSelected ? "text-white" : "text-green-500"} />
+                  <CheckCircle2 size={14} className={isSelected ? "text-white" : "text-green-500"} />
                 )}
                 {isSelected && (
                   <motion.div 
                     layoutId="activeDay"
-                    className="absolute -bottom-1 w-1 h-1 bg-white rounded-full"
+                    className="absolute -bottom-1 w-2 h-2 bg-white rounded-full"
                   />
                 )}
               </button>
@@ -320,80 +344,88 @@ export default function ScenarioSection({
       </div>
 
       {/* Welcome & Intro Text */}
-      <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-6 opacity-5">
-          <Heart size={120} className="text-brand-olive" />
+      <div className="bg-white rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 shadow-xl border-2 border-slate-100 relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-8 opacity-5">
+          <Heart size={160} className="text-brand-olive" />
         </div>
-        <div className="relative z-10">
-          <h3 className="text-2xl font-serif text-brand-olive mb-4">Құрметті ата-ана!</h3>
-          <p className="text-slate-600 mb-6 leading-relaxed">
+        <div className="relative z-10 space-y-6 sm:space-y-8">
+          <h3 className="text-3xl sm:text-4xl font-serif font-black text-brand-olive leading-tight">Құрметті ата-ана!</h3>
+          <p className="text-lg sm:text-2xl text-slate-600 leading-relaxed font-medium">
             Бұл бөлімде сізге 30 күнге 30 қарапайым тапсырма дайындалды. Барлық тапсырмаларды үйде оңай көрсетуге болады, әр күнді орындау балаңыздың дамуына нақты үлес қосады.
           </p>
-          <div className="space-y-3 mb-8">
-            <p className="font-bold text-brand-olive text-sm mb-2">Балаңызбен бірге орындайсыз:</p>
+          <div className="space-y-4 sm:space-y-6">
+            <p className="font-black text-brand-olive text-lg sm:text-xl uppercase tracking-tight">Балаңызбен бірге орындайсыз:</p>
             {[
-              { icon: MessageSquare, text: "Қарым-қатынас – сөйлесуді, назар аударуды дамытасыз", color: "text-blue-500" },
-              { icon: Hand, text: "Сенсорика – заттармен ойнап, сезімдерін дамытасыз", color: "text-purple-500" },
-              { icon: Mic2, text: "Сөйлеу – сөздерді, қимылдарды түсінуге көмектесесіз", color: "text-green-500" },
-              { icon: Zap, text: "Мінез-құлық – эмоцияларын бақылауға үйретесіз", color: "text-pink-500" }
+              { icon: MessageSquare, text: "Қарым-қатынас – сөйлесуді, назар аударуды дамытасыз", color: "text-blue-500", bg: "bg-blue-50" },
+              { icon: Hand, text: "Сенсорика – заттармен ойнап, сезімдерін дамытасыз", color: "text-purple-500", bg: "bg-purple-50" },
+              { icon: Mic2, text: "Сөйлеу – сөздерді, қимылдарды түсінуге көмектесесіз", color: "text-green-500", bg: "bg-green-50" },
+              { icon: Zap, text: "Мінез-құлық – эмоцияларын бақылауға үйретесіз", color: "text-pink-500", bg: "bg-pink-50" }
             ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                <div className={cn("w-6 h-6 rounded-lg flex items-center justify-center bg-slate-50", item.color)}>
-                  <item.icon size={14} />
+              <div key={i} className="flex items-center gap-4 sm:gap-5 p-3 sm:p-4 rounded-2xl sm:rounded-3xl bg-slate-50/50 border border-slate-100">
+                <div className={cn("w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 shadow-sm", item.bg, item.color)}>
+                  <item.icon size={20} sm:size={24} />
                 </div>
-                <span>{item.text}</span>
+                <span className="text-base sm:text-xl text-slate-700 font-bold leading-tight">{item.text}</span>
               </div>
             ))}
           </div>
-          <p className="text-brand-olive font-bold text-sm mb-8">Үйде жасаңыз, күн сайын 1 тапсырма орындаңыз – оның дамуын нақты көресіз!</p>
+          <p className="text-brand-olive font-black text-lg sm:text-2xl leading-tight border-l-4 border-brand-olive pl-4 sm:pl-6 py-2">
+            Үйде жасаңыз, күн сайын 1 тапсырма орындаңыз – оның дамуын нақты көресіз!
+          </p>
           
-          <div className="p-6 rounded-3xl bg-red-50 border border-red-100">
-            <p className="text-xs font-bold text-red-600 uppercase tracking-widest mb-3 flex items-center gap-2">
-              <AlertCircle size={14} /> ЕСКЕРТУ!
+          <div className="p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-red-50 border-2 border-red-100 space-y-4 sm:space-y-6 shadow-lg shadow-red-900/5">
+            <p className="text-[10px] sm:text-sm font-black text-red-600 uppercase tracking-[0.2em] flex items-center gap-2 sm:gap-3">
+              <AlertCircle size={16} sm:size={20} /> ЕСКЕРТУ!
             </p>
-            <p className="text-sm text-red-800 font-bold mb-2">Құрметті ата-ана!</p>
-            <p className="text-sm text-red-700/80 mb-4">Бұл 30 күн – тек бағыт.</p>
-            <ul className="space-y-2 mb-4">
-              <li className="flex items-center gap-2 text-xs text-red-700/80">
-                <CheckCircle2 size={12} /> Бала бір тапсырманы бірнеше күнде меңгеруі мүмкін.
-              </li>
-              <li className="flex items-center gap-2 text-xs text-red-700/80">
-                <CheckCircle2 size={12} /> Бұл – қалыпты жағдай.
-              </li>
-            </ul>
-            <p className="text-sm font-bold text-red-800 mb-2">Асықпаңыз!</p>
-            <p className="text-xs text-red-700/80 mb-4">Бала түсінбейінше, тапсырманы қайталай беріңіз. Маңыздысы – күн саны емес, баланың дамуы.</p>
-            <p className="text-sm font-bold text-red-800 uppercase tracking-widest">СӘТТІЛІК ТІЛЕЙМІН!</p>
+            <div className="space-y-3 sm:space-y-4">
+              <p className="text-xl sm:text-2xl font-black text-red-800">Құрметті ата-ана!</p>
+              <p className="text-lg sm:text-xl text-red-700/90 font-bold">Бұл 30 күн – тек бағыт.</p>
+              <ul className="space-y-3 sm:space-y-4">
+                <li className="flex items-start gap-3 sm:gap-4 text-base sm:text-lg text-red-700/90 font-bold leading-tight">
+                  <CheckCircle2 size={20} sm:size={24} className="shrink-0 mt-1" /> 
+                  <span>Бала бір тапсырманы бірнеше күнде меңгеруі мүмкін.</span>
+                </li>
+                <li className="flex items-start gap-3 sm:gap-4 text-base sm:text-lg text-red-700/90 font-bold leading-tight">
+                  <CheckCircle2 size={20} sm:size={24} className="shrink-0 mt-1" /> 
+                  <span>Бұл – қалыпты жағдай.</span>
+                </li>
+              </ul>
+              <div className="pt-2 sm:pt-4 space-y-3 sm:space-y-4">
+                <p className="text-xl sm:text-2xl font-black text-red-800">Асықпаңыз!</p>
+                <p className="text-base sm:text-lg text-red-700/90 font-medium leading-relaxed">Бала түсінбейінше, тапсырманы қайталай беріңіз. Маңыздысы – күн саны емес, баланың дамуы.</p>
+                <p className="text-xl sm:text-2xl font-black text-red-800 uppercase tracking-widest pt-2">СӘТТІЛІК ТІЛЕЙМІН!</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-[32px] p-6 shadow-sm border border-slate-100">
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-brand-olive flex items-center justify-center text-white text-xl font-serif shadow-lg shadow-brand-olive/20">
+      <div className="bg-white rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 shadow-xl border-2 border-slate-100">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 mb-8 sm:mb-10">
+          <div className="flex items-center gap-4 sm:gap-5">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-brand-olive flex items-center justify-center text-white text-2xl sm:text-3xl font-black shadow-xl shadow-brand-olive/20">
               {currentDay}
             </div>
             <div>
-              <p className="text-[10px] font-bold text-brand-accent uppercase tracking-widest">Күн №</p>
-              <h2 className="text-xl font-bold text-brand-olive">Бүгінгі тапсырма</h2>
+              <p className="text-[10px] sm:text-xs font-black text-brand-accent uppercase tracking-[0.2em]">Күн №</p>
+              <h2 className="text-2xl sm:text-3xl font-black text-brand-olive">Бүгінгі тапсырма</h2>
             </div>
           </div>
-          <div className="text-right">
-            <p className="text-[10px] font-bold text-slate-400 uppercase">Категория</p>
-            <div className="flex items-center gap-1 text-brand-olive font-bold text-sm">
-              {scenario?.category === "Қарым-қатынас" && <MessageSquare size={14} />}
-              {scenario?.category === "Сенсорика" && <Hand size={14} />}
-              {scenario?.category === "Сөйлеу" && <Mic2 size={14} />}
-              {scenario?.category === "Мінез-құлық" && <Zap size={14} />}
+          <div className="text-left sm:text-right w-full sm:w-auto bg-slate-50 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-100 sm:bg-transparent sm:p-0 sm:border-0">
+            <p className="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Категория</p>
+            <div className="flex items-center gap-2 text-brand-olive font-black text-lg sm:text-xl">
+              {scenario?.category === "Қарым-қатынас" && <MessageSquare size={18} sm:size={20} />}
+              {scenario?.category === "Сенсорика" && <Hand size={18} sm:size={20} />}
+              {scenario?.category === "Сөйлеу" && <Mic2 size={18} sm:size={20} />}
+              {scenario?.category === "Мінез-құлық" && <Zap size={18} sm:size={20} />}
               {scenario?.category}
             </div>
           </div>
         </div>
 
         {scenario && (
-          <div className="space-y-6">
-            <div className="w-full h-64 overflow-hidden rounded-3xl mb-6 bg-slate-100">
+          <div className="space-y-8 sm:space-y-10">
+            <div className="w-full h-64 sm:h-96 overflow-hidden rounded-[32px] sm:rounded-[40px] mb-8 sm:mb-10 bg-slate-100 shadow-inner border-2 sm:border-4 border-white">
               <img 
                 src={`/${currentDay}.jpg`} 
                 alt={scenario.title} 
@@ -401,18 +433,18 @@ export default function ScenarioSection({
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="p-5 rounded-3xl bg-brand-cream/30 border border-brand-olive/10">
-              <h3 className="text-lg font-bold text-brand-olive mb-3">
+            <div className="px-5 py-8 sm:p-10 rounded-[40px] sm:rounded-[48px] bg-brand-cream/30 border-2 border-brand-olive/10 space-y-8 sm:space-y-10 shadow-sm">
+              <h3 className="text-2xl sm:text-4xl font-black text-brand-olive leading-tight">
                 {scenario.title}
               </h3>
               
-              <div className="mb-6">
-                <p className="text-[10px] font-bold text-brand-accent uppercase tracking-widest mb-2">Тапсырма:</p>
-                <ul className="space-y-2">
+              <div className="space-y-3 sm:space-y-4">
+                <p className="text-[10px] sm:text-sm font-black text-brand-accent uppercase tracking-[0.2em] px-2">Тапсырма:</p>
+                <ul className="space-y-3 sm:space-y-4">
                   {scenario.tasks.map((task, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                      <div className="w-5 h-5 rounded-full bg-brand-olive/10 flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-[10px] font-bold text-brand-olive">{i + 1}</span>
+                    <li key={i} className="flex items-start gap-4 sm:gap-5 text-lg sm:text-2xl text-slate-700 font-bold leading-tight bg-white/40 p-5 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-white/60">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-brand-olive text-white flex items-center justify-center shrink-0 mt-0.5 shadow-md shadow-brand-olive/20 font-black text-base sm:text-lg">
+                        {i + 1}
                       </div>
                       {task}
                     </li>
@@ -420,29 +452,29 @@ export default function ScenarioSection({
                 </ul>
               </div>
 
-              <div className="mb-6">
-                <p className="text-[10px] font-bold text-brand-accent uppercase tracking-widest mb-2">Нұсқау:</p>
-                <p className="text-sm text-slate-600 leading-relaxed italic bg-white/50 p-4 rounded-2xl border border-slate-100">
+              <div className="space-y-3 sm:space-y-4">
+                <p className="text-[10px] sm:text-sm font-black text-brand-accent uppercase tracking-[0.2em] px-2">Нұсқау:</p>
+                <div className="text-lg sm:text-2xl text-slate-600 leading-relaxed italic bg-white/60 p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] border-2 border-slate-100 shadow-inner">
                   {scenario.instruction}
-                </p>
+                </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-brand-olive/5 border border-brand-olive/10 flex items-start gap-3">
-                <Heart size={18} className="text-brand-olive shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-[10px] font-bold text-brand-olive uppercase tracking-widest mb-1">Қолдау:</p>
-                  <p className="text-sm text-slate-600 italic">
+              <div className="px-5 py-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-brand-olive/5 border-2 border-brand-olive/10 flex items-start gap-4 sm:gap-6 shadow-sm">
+                <Heart size={28} sm:size={32} className="text-brand-olive shrink-0 mt-1" />
+                <div className="space-y-1 sm:space-y-2">
+                  <p className="text-[10px] sm:text-sm font-black text-brand-olive uppercase tracking-[0.2em]">Қолдау:</p>
+                  <p className="text-lg sm:text-2xl text-slate-600 italic font-medium leading-relaxed">
                     {scenario.support}
                   </p>
                 </div>
               </div>
 
               {scenario.motivation && (
-                <div className="p-4 rounded-2xl bg-brand-accent/5 border border-brand-accent/10 flex items-start gap-3">
-                  <Sparkles size={18} className="text-brand-accent shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-[10px] font-bold text-brand-accent uppercase tracking-widest mb-1">Мотивация:</p>
-                    <p className="text-sm text-slate-600 italic">
+                <div className="px-5 py-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-brand-accent/5 border-2 border-brand-accent/10 flex items-start gap-4 sm:gap-6 shadow-sm">
+                  <Sparkles size={28} sm:size={32} className="text-brand-accent shrink-0 mt-1" />
+                  <div className="space-y-1 sm:space-y-2">
+                    <p className="text-[10px] sm:text-sm font-black text-brand-accent uppercase tracking-[0.2em]">Мотивация:</p>
+                    <p className="text-lg sm:text-2xl text-slate-600 italic font-medium leading-relaxed">
                       {scenario.motivation}
                     </p>
                   </div>
@@ -450,13 +482,13 @@ export default function ScenarioSection({
               )}
             </div>
 
-            <div className="space-y-4">
-              <div className="relative">
-                <div className="flex justify-between items-center mb-2">
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Бүгін не үйрендік?</label>
+            <div className="space-y-6 sm:space-y-8">
+              <div className="relative space-y-3 sm:space-y-4">
+                <div className="flex justify-between items-center px-2">
+                  <label className="block text-[10px] sm:text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Бүгін не үйрендік?</label>
                   {isAutoSaving && (
-                    <span className="text-[10px] text-brand-olive animate-pulse flex items-center gap-1">
-                      <Loader2 size={10} className="animate-spin" /> Сақталуда...
+                    <span className="text-[10px] sm:text-sm font-black text-brand-olive animate-pulse flex items-center gap-2">
+                      <Loader2 size={12} sm:size={14} className="animate-spin" /> Сақталуда...
                     </span>
                   )}
                 </div>
@@ -464,7 +496,7 @@ export default function ScenarioSection({
                   value={dayNote}
                   onChange={(e) => setDayNote(e.target.value)}
                   placeholder="Баланың жетістіктерін қысқаша жазыңыз..."
-                  className="w-full h-24 p-4 rounded-2xl bg-slate-50 border-none focus:ring-2 focus:ring-brand-olive resize-none text-sm"
+                  className="w-full h-32 sm:h-40 p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-slate-50 border-2 border-slate-100 focus:ring-4 focus:ring-brand-olive/20 focus:border-brand-olive transition-all resize-none text-lg sm:text-xl font-medium shadow-inner"
                 />
               </div>
 
@@ -472,27 +504,97 @@ export default function ScenarioSection({
                 onClick={handleComplete}
                 disabled={isSavingProgress || completedDays[currentDay]?.completed}
                 className={cn(
-                  "w-full py-4 rounded-2xl shadow-xl flex items-center justify-center gap-3 font-bold transition-all",
+                  "w-full py-6 sm:py-8 rounded-[32px] sm:rounded-[40px] shadow-2xl flex items-center justify-center gap-3 sm:gap-4 font-black text-xl sm:text-2xl transition-all active:scale-95",
                   completedDays[currentDay]?.completed 
                     ? "bg-green-500 text-white shadow-green-200" 
-                    : "bg-brand-olive text-white shadow-brand-olive/20"
+                    : "bg-brand-olive text-white shadow-brand-olive/30 hover:bg-brand-olive/90"
                 )}
               >
-                {isSavingProgress ? <Loader2 className="animate-spin" /> : <CheckCircle2 size={20} />}
+                {isSavingProgress ? <Loader2 className="animate-spin" size={24} sm:size={28} /> : <CheckCircle2 size={28} sm:size={32} />}
                 {completedDays[currentDay]?.completed ? "Орындалды" : "Орындадым"}
               </button>
 
-              {/* Weekly Progress Section */}
-              <div className="mt-8 p-6 rounded-[32px] bg-white border border-slate-100 shadow-sm">
-                <button 
-                  onClick={() => setShowWeeklyProgress(!showWeeklyProgress)}
-                  className="w-full flex items-center justify-between mb-2"
-                >
-                  <div className="flex items-center gap-2">
-                    <Calendar size={18} className="text-brand-olive" />
-                    <h4 className="text-xs font-bold text-brand-olive uppercase tracking-widest">Апталық прогресс</h4>
+              {/* Weekly Progress Section - CRITICAL: BIG AND LOUD */}
+              <div className="mt-8 sm:mt-12 px-4 py-8 sm:p-10 rounded-[40px] sm:rounded-[50px] bg-brand-cream border-4 border-brand-olive/20 shadow-2xl relative overflow-hidden">
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-olive/5 rounded-full blur-3xl" />
+                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-accent/5 rounded-full blur-3xl" />
+                
+                <div className="relative z-10 space-y-6 sm:space-y-8">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-olive text-white flex items-center justify-center shadow-lg shadow-brand-olive/20">
+                        <Calendar size={24} sm:size={32} />
+                      </div>
+                      <h4 className="text-xl sm:text-2xl font-black text-brand-olive uppercase tracking-tight">Апталық прогресс</h4>
+                    </div>
+                    {(() => {
+                      const currentWeek = Math.ceil(currentDay / 7);
+                      const weekStart = (currentWeek - 1) * 7 + 1;
+                      const weekEnd = Math.min(currentWeek * 7, 30);
+                      let completedInWeek = 0;
+                      for (let d = weekStart; d <= weekEnd; d++) {
+                        if (completedDays[d]?.completed) completedInWeek++;
+                      }
+                      const percentage = Math.round((completedInWeek / (weekEnd - weekStart + 1)) * 100);
+                      return (
+                        <div className="flex flex-row sm:flex-col items-center sm:items-end gap-3 sm:gap-2">
+                          <span className="text-2xl sm:text-3xl font-black text-brand-olive bg-white px-4 sm:px-6 py-1 sm:py-2 rounded-xl sm:rounded-2xl shadow-sm border-2 border-brand-olive/10">
+                            {completedInWeek}/{weekEnd - weekStart + 1}
+                          </span>
+                          <p className="text-[10px] sm:text-sm font-black text-brand-olive/60 uppercase tracking-widest">{percentage}% ОРЫНДАЛДЫ</p>
+                        </div>
+                      );
+                    })()}
                   </div>
-                  <div className="flex items-center gap-2">
+
+                  <div className="grid grid-cols-1 gap-2 sm:gap-3">
+                    {(() => {
+                      const currentWeek = Math.ceil(currentDay / 7);
+                      const weekStart = (currentWeek - 1) * 7 + 1;
+                      const weekEnd = Math.min(currentWeek * 7, 30);
+                      const weekRows = [];
+
+                      for (let d = weekStart; d <= weekEnd; d++) {
+                        const isCompleted = completedDays[d]?.completed;
+                        const dayScenario = DAILY_SCENARIOS.find(s => s.day === d);
+                        const isCurrent = d === currentDay;
+                        
+                        weekRows.push(
+                          <div 
+                            key={d} 
+                            className={cn(
+                              "grid grid-cols-[60px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-center p-3 sm:p-5 rounded-[20px] sm:rounded-[28px] transition-all border-2",
+                              isCurrent 
+                                ? "bg-brand-olive text-white border-brand-olive shadow-xl scale-[1.02] z-10" 
+                                : isCompleted
+                                  ? "bg-white text-slate-700 border-green-100 shadow-sm"
+                                  : "bg-white/50 text-slate-400 border-slate-100"
+                            )}
+                          >
+                            <span className={cn("text-[10px] sm:text-xs font-black uppercase tracking-widest", isCurrent ? "text-white/80" : "text-slate-400")}>
+                              {d}-күн
+                            </span>
+                            <span className={cn("text-base sm:text-lg font-black px-2 sm:px-4 leading-tight", isCurrent ? "text-white" : "text-slate-700")}>
+                              {dayScenario?.category || "-"}
+                            </span>
+                            <div className="flex justify-center">
+                              {isCompleted ? (
+                                <CheckCircle2 size={24} sm:size={28} className={isCurrent ? "text-white" : "text-green-500"} />
+                              ) : d < currentDay ? (
+                                <XCircle size={24} sm:size={28} className={isCurrent ? "text-white/50" : "text-red-400"} />
+                              ) : (
+                                <Circle size={24} sm:size={28} className={isCurrent ? "text-white/30" : "text-slate-200"} />
+                              )}
+                            </div>
+                          </div>
+                        );
+                      }
+
+                      return weekRows;
+                    })()}
+                  </div>
+
+                  <div className="pt-4 sm:pt-6 border-t-2 border-brand-olive/10">
                     {(() => {
                       const currentWeek = Math.ceil(currentDay / 7);
                       const weekStart = (currentWeek - 1) * 7 + 1;
@@ -502,98 +604,33 @@ export default function ScenarioSection({
                         if (completedDays[d]?.completed) completedInWeek++;
                       }
                       return (
-                        <span className="text-[10px] font-bold bg-brand-cream text-brand-olive px-3 py-1 rounded-full">
-                          {completedInWeek}/{weekEnd - weekStart + 1}
-                        </span>
-                      );
-                    })()}
-                    <ChevronRight size={16} className={cn("text-brand-olive transition-transform", showWeeklyProgress && "rotate-90")} />
-                  </div>
-                </button>
-
-                {showWeeklyProgress && (
-                  <motion.div 
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="space-y-1 pt-4">
-                      {(() => {
-                        const currentWeek = Math.ceil(currentDay / 7);
-                        const weekStart = (currentWeek - 1) * 7 + 1;
-                        const weekEnd = Math.min(currentWeek * 7, 30);
-                        const weekRows = [];
-
-                        for (let d = weekStart; d <= weekEnd; d++) {
-                          const isCompleted = completedDays[d]?.completed;
-                          const dayScenario = DAILY_SCENARIOS.find(s => s.day === d);
-                          const isCurrent = d === currentDay;
-                          
-                          weekRows.push(
-                            <div 
-                              key={d} 
-                              className={cn(
-                                "grid grid-cols-[60px_1fr_40px] items-center p-3 rounded-xl transition-colors",
-                                isCurrent ? "bg-brand-olive text-white" : "hover:bg-slate-50 border-b border-slate-50 last:border-0"
-                              )}
-                            >
-                              <span className={cn("text-[10px] font-bold uppercase", isCurrent ? "text-white/70" : "text-slate-400")}>
-                                {d}-күн
-                              </span>
-                              <span className={cn("text-xs font-medium truncate px-2", isCurrent ? "text-white" : "text-slate-600")}>
-                                {dayScenario?.category || "-"}
-                              </span>
-                              <div className="flex justify-center">
-                                {isCompleted ? (
-                                  <CheckCircle2 size={16} className={isCurrent ? "text-white" : "text-green-500"} />
-                                ) : d < currentDay ? (
-                                  <XCircle size={16} className={isCurrent ? "text-white/50" : "text-red-400"} />
-                                ) : (
-                                  <Circle size={16} className={isCurrent ? "text-white/30" : "text-slate-200"} />
-                                )}
-                              </div>
-                            </div>
-                          );
-                        }
-
-                        return weekRows;
-                      })()}
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-slate-100">
-                      {(() => {
-                        const currentWeek = Math.ceil(currentDay / 7);
-                        const weekStart = (currentWeek - 1) * 7 + 1;
-                        const weekEnd = Math.min(currentWeek * 7, 30);
-                        let completedInWeek = 0;
-                        for (let d = weekStart; d <= weekEnd; d++) {
-                          if (completedDays[d]?.completed) completedInWeek++;
-                        }
-                        return (
-                          <p className="text-center text-xs font-serif italic text-brand-olive">
+                        <div className="text-center space-y-1 sm:space-y-2">
+                          <p className="text-xl sm:text-2xl font-serif italic font-black text-brand-olive">
                             Апта ішінде барлығы {completedInWeek}/{weekEnd - weekStart + 1} тапсырма орындалды
                           </p>
-                        );
-                      })()}
-                    </div>
-                  </motion.div>
-                )}
+                          <p className="text-[10px] sm:text-sm font-black text-brand-olive/50 uppercase tracking-[0.3em]">Сіз кереметсіз!</p>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         )}
       </div>
 
+
       {/* Motivational Banner */}
       {Object.keys(completedDays).length >= 7 && (
-        <div className="p-6 rounded-[32px] bg-gradient-to-br from-brand-olive to-brand-olive/80 text-white shadow-lg">
-          <div className="flex items-center gap-4 mb-2">
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-              <Sparkles size={20} />
+        <div className="p-10 rounded-[40px] bg-gradient-to-br from-brand-olive to-brand-olive/80 text-white shadow-2xl border-2 border-white/20">
+          <div className="flex items-center gap-6 mb-4">
+            <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center shadow-inner">
+              <Sparkles size={32} />
             </div>
-            <h3 className="font-bold">7 күн қатарынан орындадыңыз!</h3>
+            <h3 className="text-3xl font-black leading-tight">7 күн қатарынан орындадыңыз!</h3>
           </div>
-          <p className="text-xs text-white/80">Сіз кереметсіз, балаңыздың дамуына үлес қосып жатырсыз!</p>
+          <p className="text-xl text-white/80 font-bold">Сіз кереметсіз, балаңыздың дамуына үлес қосып жатырсыз!</p>
         </div>
       )}
 
@@ -602,37 +639,37 @@ export default function ScenarioSection({
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-brand-olive text-white rounded-[32px] p-8 shadow-xl border border-white/10"
+          className="bg-brand-olive text-white rounded-[50px] p-12 shadow-2xl border-4 border-white/10"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-full bg-white text-brand-olive flex items-center justify-center">
-              <ShieldCheck size={24} />
+          <div className="flex items-center gap-6 mb-10">
+            <div className="w-20 h-20 rounded-full bg-white text-brand-olive flex items-center justify-center shadow-xl">
+              <ShieldCheck size={40} />
             </div>
-            <h3 className="text-2xl font-serif">Құрметті ата-ана! Сіз 30 күнді аяқтадыңыз!</h3>
+            <h3 className="text-4xl font-serif font-black leading-tight">Құрметті ата-ана! Сіз 30 күнді аяқтадыңыз!</h3>
           </div>
-          <p className="mb-4 font-bold text-brand-cream">Бұл жолда СІЗ:</p>
-          <ul className="space-y-3 mb-8">
+          <p className="mb-6 font-black text-brand-cream text-2xl uppercase tracking-tight">Бұл жолда СІЗ:</p>
+          <ul className="space-y-6 mb-12">
             {[
               "Балаңызбен қарым-қатынасты жақсарттыңыз",
               "Баланың сенсорлық қабілеттерін дамыттыңыз",
               "Сөйлеу дағдыларын қолдадыңыз",
               "Баланың мінезін бақылауды үйрендіңіз"
             ].map((item, i) => (
-              <li key={i} className="flex items-center gap-3 text-sm">
-                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-                  <CheckCircle2 size={12} />
+              <li key={i} className="flex items-center gap-5 text-xl md:text-2xl font-bold">
+                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0 shadow-sm">
+                  <CheckCircle2 size={20} />
                 </div>
                 {item}
               </li>
             ))}
           </ul>
-          <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/5">
-            <p className="text-sm leading-relaxed italic">
+          <div className="p-10 rounded-[40px] bg-white/10 backdrop-blur-sm border-2 border-white/5 shadow-inner">
+            <p className="text-xl md:text-2xl leading-relaxed italic font-medium">
               Енді сізде баланың күнделікті дамуын бақылау үшін толық база бар. Күнделікті кішкене қадамдар арқылы үлкен нәтижеге жетуге болады!
               <br /><br />
               Есіңізде болсын: әрбір жасалған қадам – баланың дамуына нақты үлес қосады. Сізбен бірге жасаған әр минут – оның болашағына инвестиция.
               <br /><br />
-              <span className="font-bold not-italic">Сіз жақсы анасыз! Баяу жүрсеңіз де — дұрыс жолдасыз.</span>
+              <span className="font-black not-italic text-white text-2xl md:text-3xl block mt-4">Сіз жақсы анасыз! Баяу жүрсеңіз де — дұрыс жолдасыз.</span>
             </p>
           </div>
         </motion.div>
