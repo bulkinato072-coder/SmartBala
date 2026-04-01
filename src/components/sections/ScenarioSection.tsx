@@ -81,6 +81,9 @@ export default function ScenarioSection({
 
   const handleComplete = async () => {
     if (!userProfile) return;
+    console.log("Attempting to complete day:", currentDay);
+    console.log("Current user profile:", userProfile.uid);
+    
     setIsSavingProgress(true);
     try {
       const progressRef = doc(db, "progress", userProfile.uid);
@@ -94,10 +97,12 @@ export default function ScenarioSection({
         lastUpdated: serverTimestamp()
       };
 
+      console.log("Saving to Firestore:", updateData);
       await setDoc(progressRef, updateData, { merge: true });
+      console.log("Save successful!");
       setCompletedDays(newCompleted);
-      // App.tsx will handle setSelectedDay via useEffect
     } catch (error) {
+      console.error("Failed to save progress:", error);
       handleFirestoreError(error, OperationType.WRITE, "progress");
     } finally {
       setIsSavingProgress(false);
@@ -119,7 +124,9 @@ export default function ScenarioSection({
               const isCompleted = completedDays[dayNum]?.completed;
               const isSelected = currentDay === dayNum;
               
-              const completedKeys = Object.keys(completedDays).map(Number);
+              const completedKeys = Object.keys(completedDays)
+                .map(Number)
+                .filter(day => completedDays[day]?.completed);
               const lastCompleted = completedKeys.length > 0 ? Math.max(...completedKeys) : 0;
               const nextAvailableDay = Math.min(lastCompleted + 1, 30);
               const isFuture = dayNum > nextAvailableDay;
@@ -190,6 +197,15 @@ export default function ScenarioSection({
               </div>
             )}
           </div>
+
+          {currentDay < 30 && (
+            <button
+              onClick={() => setSelectedDay(currentDay + 1)}
+              className="w-full py-6 sm:py-8 rounded-[32px] sm:rounded-[40px] bg-brand-olive text-white shadow-2xl flex items-center justify-center gap-3 sm:gap-4 font-black text-xl sm:text-2xl transition-all active:scale-95 hover:bg-brand-olive/90"
+            >
+              Келесі күнге өту <ChevronRight className="w-7 h-7 sm:w-8 sm:h-8" />
+            </button>
+          )}
         </div>
 
         {/* Weekly Progress Section - BIG AND LOUD */}
@@ -201,7 +217,7 @@ export default function ScenarioSection({
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-olive text-white flex items-center justify-center shadow-lg shadow-brand-olive/20">
-                  <Calendar size={24} sm:size={32} />
+                  <Calendar className="w-6 h-6 sm:w-8 sm:h-8" />
                 </div>
                 <h4 className="text-xl sm:text-2xl font-black text-brand-olive uppercase tracking-tight">Апталық прогресс</h4>
               </div>
@@ -241,7 +257,7 @@ export default function ScenarioSection({
                     <div 
                       key={d} 
                       className={cn(
-                        "grid grid-cols-[60px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-center p-3 sm:p-5 rounded-[20px] sm:rounded-[28px] transition-all border-2",
+                        "grid grid-cols-[50px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-center p-3 sm:p-5 rounded-[20px] sm:rounded-[28px] transition-all border-2",
                         isCurrent 
                           ? "bg-brand-olive text-white border-brand-olive shadow-xl scale-[1.02] z-10" 
                           : isCompleted
@@ -252,16 +268,16 @@ export default function ScenarioSection({
                       <span className={cn("text-[10px] sm:text-xs font-black uppercase tracking-widest", isCurrent ? "text-white/80" : "text-slate-400")}>
                         {d}-күн
                       </span>
-                      <span className={cn("text-base sm:text-lg font-black px-2 sm:px-4 leading-tight", isCurrent ? "text-white" : "text-slate-700")}>
+                      <span className={cn("text-sm sm:text-lg font-black px-1 sm:px-4 leading-tight truncate", isCurrent ? "text-white" : "text-slate-700")}>
                         {dayScenario?.category || "-"}
                       </span>
                       <div className="flex justify-center">
                         {isCompleted ? (
-                          <CheckCircle2 size={24} sm:size={28} className={isCurrent ? "text-white" : "text-green-500"} />
+                          <CheckCircle2 className={cn("w-6 h-6 sm:w-7 sm:h-7", isCurrent ? "text-white" : "text-green-500")} />
                         ) : d < currentDay ? (
-                          <XCircle size={24} sm:size={28} className={isCurrent ? "text-white/50" : "text-red-400"} />
+                          <XCircle className={cn("w-6 h-6 sm:w-7 sm:h-7", isCurrent ? "text-white/50" : "text-red-400")} />
                         ) : (
-                          <Circle size={24} sm:size={28} className={isCurrent ? "text-white/30" : "text-slate-200"} />
+                          <Circle className={cn("w-6 h-6 sm:w-7 sm:h-7", isCurrent ? "text-white/30" : "text-slate-200")} />
                         )}
                       </div>
                     </div>
@@ -303,15 +319,17 @@ export default function ScenarioSection({
       {/* Day Navigation */}
       <div className="bg-white rounded-[32px] p-6 shadow-md border-2 border-slate-100 overflow-x-auto scrollbar-hide">
         <div className="flex gap-4 min-w-max px-2">
-          {[...Array(30)].map((_, i) => {
-            const dayNum = i + 1;
-            const isCompleted = completedDays[dayNum]?.completed;
-            const isSelected = currentDay === dayNum;
-            
-            const completedKeys = Object.keys(completedDays).map(Number);
-            const lastCompleted = completedKeys.length > 0 ? Math.max(...completedKeys) : 0;
-            const nextAvailableDay = Math.min(lastCompleted + 1, 30);
-            const isFuture = dayNum > nextAvailableDay;
+            {[...Array(30)].map((_, i) => {
+              const dayNum = i + 1;
+              const isCompleted = completedDays[dayNum]?.completed;
+              const isSelected = currentDay === dayNum;
+              
+              const completedKeys = Object.keys(completedDays)
+                .map(Number)
+                .filter(day => completedDays[day]?.completed);
+              const lastCompleted = completedKeys.length > 0 ? Math.max(...completedKeys) : 0;
+              const nextAvailableDay = Math.min(lastCompleted + 1, 30);
+              const isFuture = dayNum > nextAvailableDay;
             
             return (
               <button
@@ -363,7 +381,7 @@ export default function ScenarioSection({
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-4 sm:gap-5 p-3 sm:p-4 rounded-2xl sm:rounded-3xl bg-slate-50/50 border border-slate-100">
                 <div className={cn("w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 shadow-sm", item.bg, item.color)}>
-                  <item.icon size={20} sm:size={24} />
+                  <item.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <span className="text-base sm:text-xl text-slate-700 font-bold leading-tight">{item.text}</span>
               </div>
@@ -375,18 +393,18 @@ export default function ScenarioSection({
           
           <div className="p-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-red-50 border-2 border-red-100 space-y-4 sm:space-y-6 shadow-lg shadow-red-900/5">
             <p className="text-[10px] sm:text-sm font-black text-red-600 uppercase tracking-[0.2em] flex items-center gap-2 sm:gap-3">
-              <AlertCircle size={16} sm:size={20} /> ЕСКЕРТУ!
+              <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5" /> ЕСКЕРТУ!
             </p>
             <div className="space-y-3 sm:space-y-4">
               <p className="text-xl sm:text-2xl font-black text-red-800">Құрметті ата-ана!</p>
               <p className="text-lg sm:text-xl text-red-700/90 font-bold">Бұл 30 күн – тек бағыт.</p>
               <ul className="space-y-3 sm:space-y-4">
                 <li className="flex items-start gap-3 sm:gap-4 text-base sm:text-lg text-red-700/90 font-bold leading-tight">
-                  <CheckCircle2 size={20} sm:size={24} className="shrink-0 mt-1" /> 
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 mt-1" /> 
                   <span>Бала бір тапсырманы бірнеше күнде меңгеруі мүмкін.</span>
                 </li>
                 <li className="flex items-start gap-3 sm:gap-4 text-base sm:text-lg text-red-700/90 font-bold leading-tight">
-                  <CheckCircle2 size={20} sm:size={24} className="shrink-0 mt-1" /> 
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 mt-1" /> 
                   <span>Бұл – қалыпты жағдай.</span>
                 </li>
               </ul>
@@ -414,10 +432,10 @@ export default function ScenarioSection({
           <div className="text-left sm:text-right w-full sm:w-auto bg-slate-50 p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-100 sm:bg-transparent sm:p-0 sm:border-0">
             <p className="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Категория</p>
             <div className="flex items-center gap-2 text-brand-olive font-black text-lg sm:text-xl">
-              {scenario?.category === "Қарым-қатынас" && <MessageSquare size={18} sm:size={20} />}
-              {scenario?.category === "Сенсорика" && <Hand size={18} sm:size={20} />}
-              {scenario?.category === "Сөйлеу" && <Mic2 size={18} sm:size={20} />}
-              {scenario?.category === "Мінез-құлық" && <Zap size={18} sm:size={20} />}
+              {scenario?.category === "Қарым-қатынас" && <MessageSquare className="w-4.5 h-4.5 sm:w-5 sm:h-5" />}
+              {scenario?.category === "Сенсорика" && <Hand className="w-4.5 h-4.5 sm:w-5 sm:h-5" />}
+              {scenario?.category === "Сөйлеу" && <Mic2 className="w-4.5 h-4.5 sm:w-5 sm:h-5" />}
+              {scenario?.category === "Мінез-құлық" && <Zap className="w-4.5 h-4.5 sm:w-5 sm:h-5" />}
               {scenario?.category}
             </div>
           </div>
@@ -460,7 +478,7 @@ export default function ScenarioSection({
               </div>
 
               <div className="px-5 py-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-brand-olive/5 border-2 border-brand-olive/10 flex items-start gap-4 sm:gap-6 shadow-sm">
-                <Heart size={28} sm:size={32} className="text-brand-olive shrink-0 mt-1" />
+                <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-brand-olive shrink-0 mt-1" />
                 <div className="space-y-1 sm:space-y-2">
                   <p className="text-[10px] sm:text-sm font-black text-brand-olive uppercase tracking-[0.2em]">Қолдау:</p>
                   <p className="text-lg sm:text-2xl text-slate-600 italic font-medium leading-relaxed">
@@ -471,7 +489,7 @@ export default function ScenarioSection({
 
               {scenario.motivation && (
                 <div className="px-5 py-6 sm:p-8 rounded-[32px] sm:rounded-[40px] bg-brand-accent/5 border-2 border-brand-accent/10 flex items-start gap-4 sm:gap-6 shadow-sm">
-                  <Sparkles size={28} sm:size={32} className="text-brand-accent shrink-0 mt-1" />
+                  <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-brand-accent shrink-0 mt-1" />
                   <div className="space-y-1 sm:space-y-2">
                     <p className="text-[10px] sm:text-sm font-black text-brand-accent uppercase tracking-[0.2em]">Мотивация:</p>
                     <p className="text-lg sm:text-2xl text-slate-600 italic font-medium leading-relaxed">
@@ -488,7 +506,7 @@ export default function ScenarioSection({
                   <label className="block text-[10px] sm:text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Бүгін не үйрендік?</label>
                   {isAutoSaving && (
                     <span className="text-[10px] sm:text-sm font-black text-brand-olive animate-pulse flex items-center gap-2">
-                      <Loader2 size={12} sm:size={14} className="animate-spin" /> Сақталуда...
+                      <Loader2 className="animate-spin w-3 h-3 sm:w-3.5 sm:h-3.5" /> Сақталуда...
                     </span>
                   )}
                 </div>
@@ -510,7 +528,7 @@ export default function ScenarioSection({
                     : "bg-brand-olive text-white shadow-brand-olive/30 hover:bg-brand-olive/90"
                 )}
               >
-                {isSavingProgress ? <Loader2 className="animate-spin" size={24} sm:size={28} /> : <CheckCircle2 size={28} sm:size={32} />}
+                {isSavingProgress ? <Loader2 className="animate-spin w-6 h-6 sm:w-7 sm:h-7" /> : <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />}
                 {completedDays[currentDay]?.completed ? "Орындалды" : "Орындадым"}
               </button>
 
@@ -523,7 +541,7 @@ export default function ScenarioSection({
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
                     <div className="flex items-center gap-3 sm:gap-4">
                       <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-olive text-white flex items-center justify-center shadow-lg shadow-brand-olive/20">
-                        <Calendar size={24} sm:size={32} />
+                        <Calendar className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
                       <h4 className="text-xl sm:text-2xl font-black text-brand-olive uppercase tracking-tight">Апталық прогресс</h4>
                     </div>
@@ -563,7 +581,7 @@ export default function ScenarioSection({
                           <div 
                             key={d} 
                             className={cn(
-                              "grid grid-cols-[60px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-center p-3 sm:p-5 rounded-[20px] sm:rounded-[28px] transition-all border-2",
+                              "grid grid-cols-[50px_1fr_40px] sm:grid-cols-[80px_1fr_60px] items-center p-3 sm:p-5 rounded-[20px] sm:rounded-[28px] transition-all border-2",
                               isCurrent 
                                 ? "bg-brand-olive text-white border-brand-olive shadow-xl scale-[1.02] z-10" 
                                 : isCompleted
@@ -574,16 +592,16 @@ export default function ScenarioSection({
                             <span className={cn("text-[10px] sm:text-xs font-black uppercase tracking-widest", isCurrent ? "text-white/80" : "text-slate-400")}>
                               {d}-күн
                             </span>
-                            <span className={cn("text-base sm:text-lg font-black px-2 sm:px-4 leading-tight", isCurrent ? "text-white" : "text-slate-700")}>
+                            <span className={cn("text-sm sm:text-lg font-black px-1 sm:px-4 leading-tight truncate", isCurrent ? "text-white" : "text-slate-700")}>
                               {dayScenario?.category || "-"}
                             </span>
                             <div className="flex justify-center">
                               {isCompleted ? (
-                                <CheckCircle2 size={24} sm:size={28} className={isCurrent ? "text-white" : "text-green-500"} />
+                                <CheckCircle2 className={cn("w-6 h-6 sm:w-7 sm:h-7", isCurrent ? "text-white" : "text-green-500")} />
                               ) : d < currentDay ? (
-                                <XCircle size={24} sm:size={28} className={isCurrent ? "text-white/50" : "text-red-400"} />
+                                <XCircle className={cn("w-6 h-6 sm:w-7 sm:h-7", isCurrent ? "text-white/50" : "text-red-400")} />
                               ) : (
-                                <Circle size={24} sm:size={28} className={isCurrent ? "text-white/30" : "text-slate-200"} />
+                                <Circle className={cn("w-6 h-6 sm:w-7 sm:h-7", isCurrent ? "text-white/30" : "text-slate-200")} />
                               )}
                             </div>
                           </div>
