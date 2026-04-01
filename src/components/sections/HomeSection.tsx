@@ -143,10 +143,10 @@ export default function HomeSection() {
               "Прогресс бақылау макеті"
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-brand-olive/20 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle2 size={12} className="text-brand-olive" />
+                <div className="w-6 h-6 rounded-full bg-brand-olive/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle2 size={14} className="text-brand-olive" />
                 </div>
-                <span className="text-sm font-medium text-slate-700">{item}</span>
+                <span className="text-base md:text-lg font-medium text-slate-700">{item}</span>
               </div>
             ))}
           </div>
@@ -160,10 +160,10 @@ export default function HomeSection() {
               "Өзіне-өзі қызмет көрсету"
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-brand-accent/20 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle2 size={12} className="text-brand-accent" />
+                <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <CheckCircle2 size={14} className="text-brand-accent" />
                 </div>
-                <span className="text-sm font-medium text-slate-700">{item}</span>
+                <span className="text-base md:text-lg font-medium text-slate-700">{item}</span>
               </div>
             ))}
           </div>
@@ -173,18 +173,29 @@ export default function HomeSection() {
 
       {/* 30-Day Scenarios */}
       <section className="snap-start scroll-mt-20 md:scroll-mt-0 min-h-[85vh] md:min-h-0 flex flex-col justify-center">
-        <div className="mx-2 p-6 md:p-8 rounded-[32px] bg-white border border-slate-100 space-y-4">
-        <h4 className="font-serif font-black text-brand-olive text-2xl md:text-3xl">30 күндік даму сценарийлері</h4>
-        <p className="text-sm text-slate-600 leading-relaxed">
-          Әр күнге арналған арнайы жоспар баланың жүйелі дамуын қамтамасыз етеді. Тақырыптар келесі бағыттарды қамтиды:
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {["Зейін қою", "Еліктеу дағдылары", "Тілдік қарым-қатынас", "Ойын әрекеті", "Эмоционалды реттеу"].map((tag, i) => (
-            <span key={i} className="px-3 py-1 bg-brand-cream text-brand-olive text-xs font-bold rounded-full border border-brand-olive/10">
-              {tag}
-            </span>
-          ))}
-        </div>
+        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-white border-2 border-brand-olive/5 shadow-xl space-y-6">
+          <h4 className="font-serif font-black text-brand-olive text-3xl md:text-4xl leading-tight">
+            30 күндік даму сценарийлері
+          </h4>
+          <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+            Әр күнге арналған арнайы жоспар баланың жүйелі дамуын қамтамасыз етеді. Тақырыптар келесі бағыттарды қамтиды:
+          </p>
+          <div className="flex flex-wrap gap-3 md:gap-4">
+            {[
+              "Зейін қою",
+              "Еліктеу дағдылары",
+              "Тілдік қарым-қатынас",
+              "Ойын әрекеті",
+              "Эмоционалды реттеу"
+            ].map((tag, i) => (
+              <span 
+                key={i} 
+                className="px-6 py-3 bg-brand-cream text-brand-olive text-lg md:text-xl font-black rounded-2xl border-2 border-brand-olive/10 shadow-sm"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -196,33 +207,39 @@ export default function HomeSection() {
           <h4 className="font-serif font-black text-2xl md:text-3xl">SOS жедел көмек</h4>
         </div>
         <div className="space-y-3">
-          <div className="p-4 bg-white rounded-2xl border border-red-100">
-            <h5 className="font-black text-lg text-red-700 mb-1">SOS тізімі:</h5>
-            <p className="text-sm text-slate-600">Күрделі мінез-құлық кезіндегі алгоритмдер, қауіпсіздік шаралары және жедел әрекет ету жоспары.</p>
+          <div className="p-5 bg-white rounded-2xl border border-red-100">
+            <h5 className="font-black text-xl text-red-700 mb-2">SOS тізімі:</h5>
+            <p className="text-base md:text-lg text-slate-600">Күрделі мінез-құлық кезіндегі алгоритмдер, қауіпсіздік шаралары және жедел әрекет ету жоспары.</p>
           </div>
-          <div className="p-4 bg-white rounded-2xl border border-red-100">
-            <h5 className="font-black text-lg text-red-700 mb-1">SOS қорытынды:</h5>
-            <p className="text-sm text-slate-600">Оқиғадан кейінгі талдау, баланың күйін тұрақтандыру және болашақта алдын алу шаралары.</p>
+          <div className="p-5 bg-white rounded-2xl border border-red-100">
+            <h5 className="font-black text-xl text-red-700 mb-2">SOS қорытынды:</h5>
+            <p className="text-base md:text-lg text-slate-600">Оқиғадан кейінгі талдау, баланың күйін тұрақтандыру және болашақта алдын алу шаралары.</p>
           </div>
         </div>
         </div>
       </section>
 
-      {/* Progress & Q&A */}
+      {/* Progress Tracking */}
       <section className="snap-start scroll-mt-20 md:scroll-mt-0 min-h-[85vh] md:min-h-0 flex flex-col justify-center">
-        <div className="mx-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-6 rounded-[32px] bg-white border border-slate-100 space-y-3">
-            <h4 className="font-serif font-black text-brand-olive text-2xl md:text-3xl">Прогресс макеті</h4>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Баланың даму динамикасын визуалды түрде бақылауға арналған макет. Әрбір жетістік пен өзгеріс тіркеліп отырады.
-            </p>
-          </div>
-          <div className="p-6 rounded-[32px] bg-white border border-slate-100 space-y-3">
-            <h4 className="font-serif font-black text-brand-olive text-2xl md:text-3xl">Сұрақ-жауап</h4>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Ата-аналар жиі қоятын сұрақтарға мамандардың жауаптары. Тәжірибелік кеңестер мен нұсқаулықтар жинағы.
-            </p>
-          </div>
+        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-white border-2 border-brand-olive/5 shadow-xl space-y-6">
+          <h4 className="font-serif font-black text-brand-olive text-3xl md:text-4xl leading-tight">
+            Прогресс макеті
+          </h4>
+          <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+            Баланың даму динамикасын визуалды түрде бақылауға арналған макет. Әрбір жетістік пен өзгеріс тіркеліп отырады.
+          </p>
+        </div>
+      </section>
+
+      {/* Q&A */}
+      <section className="snap-start scroll-mt-20 md:scroll-mt-0 min-h-[85vh] md:min-h-0 flex flex-col justify-center">
+        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-white border-2 border-brand-olive/5 shadow-xl space-y-6">
+          <h4 className="font-serif font-black text-brand-olive text-3xl md:text-4xl leading-tight">
+            Сұрақ-жауап
+          </h4>
+          <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+            Ата-аналар жиі қоятын сұрақтарға мамандардың жауаптары. Тәжірибелік кеңестер мен нұсқаулықтар жинағы.
+          </p>
         </div>
       </section>
     </div>
