@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { Award, BookOpen, Star, Heart, ShieldCheck, Target, TrendingUp, Users, Smartphone, CheckCircle2 } from "lucide-react";
+import { Award, BookOpen, Star, Heart, ShieldCheck, Target, TrendingUp, Users, Smartphone, CheckCircle2, AlertCircle, XCircle } from "lucide-react";
+import { SOS_CONTENT } from "../../constants";
 
 export default function HomeSection() {
   return (
@@ -199,19 +200,71 @@ export default function HomeSection() {
         </div>
       </section>
 
-      {/* SOS List */}
+      {/* SOS Situations - Detailed */}
       <section className="snap-start scroll-mt-20 md:scroll-mt-0 min-h-[85vh] md:min-h-0 flex flex-col justify-center">
-        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-red-50 border-2 border-red-100 shadow-xl space-y-6">
-          <div className="flex items-center gap-4 text-red-600">
-            <ShieldCheck size={40} />
-            <h4 className="font-serif font-black text-3xl md:text-4xl leading-tight">SOS тізімі</h4>
+        <div className="mx-2 space-y-6">
+          <div className="flex items-center gap-4 text-red-600 px-4">
+            <AlertCircle size={40} />
+            <h4 className="font-serif font-black text-3xl md:text-4xl leading-tight">SOS: Қазір не істеу керек?</h4>
           </div>
-          <div className="p-6 bg-white rounded-[32px] border-2 border-red-100 shadow-sm">
-            <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-black mb-4">
-              Күрделі мінез-құлық кезіндегі алгоритмдер:
-            </p>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
-              Қауіпсіздік шаралары, жедел әрекет ету жоспары және баланың күйін бақылау нұсқаулықтары.
+          
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 px-4 no-scrollbar">
+            {SOS_CONTENT.situations.map((situation) => (
+              <div 
+                key={situation.id} 
+                className="snap-center shrink-0 w-[85vw] md:w-[400px] p-8 rounded-[40px] bg-white border-2 border-red-100 shadow-xl flex flex-col gap-6"
+              >
+                <div className="space-y-2">
+                  <span className="text-red-500 font-black text-lg">Жағдай {situation.id}:</span>
+                  <h5 className="font-black text-2xl md:text-3xl text-slate-800 leading-tight">
+                    {situation.title}
+                  </h5>
+                </div>
+                
+                <div className="p-5 bg-red-50/50 rounded-2xl border border-red-100">
+                  <p className="text-lg md:text-xl text-slate-700 font-bold italic">
+                    "{situation.happening}"
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-green-600">
+                    <CheckCircle2 size={24} />
+                    <span className="font-black text-xl">НЕ ІСТЕУ КЕРЕК:</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {situation.todo.map((item, i) => (
+                      <li key={i} className="flex gap-3 text-lg md:text-xl text-slate-600 font-medium leading-tight">
+                        <span className="text-green-500 shrink-0">•</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {situation.notodo && (
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center gap-2 text-red-500">
+                      <XCircle size={24} />
+                      <span className="font-black text-xl">НЕ ІСТЕУГЕ БОЛМАЙДЫ:</span>
+                    </div>
+                    <ul className="space-y-3">
+                      {situation.notodo.map((item, i) => (
+                        <li key={i} className="flex gap-3 text-lg md:text-xl text-slate-600 font-medium leading-tight opacity-80">
+                          <span className="text-red-400 shrink-0">•</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          <div className="px-6 text-center">
+            <p className="text-slate-400 font-medium animate-pulse">
+              Оңға қарай жылжытыңыз →
             </p>
           </div>
         </div>
@@ -219,17 +272,26 @@ export default function HomeSection() {
 
       {/* SOS Conclusion */}
       <section className="snap-start scroll-mt-20 md:scroll-mt-0 min-h-[85vh] md:min-h-0 flex flex-col justify-center">
-        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-red-50 border-2 border-red-100 shadow-xl space-y-6">
-          <div className="flex items-center gap-4 text-red-600">
-            <ShieldCheck size={40} />
+        <div className="mx-2 p-8 md:p-10 rounded-[40px] bg-red-600 border-2 border-red-700 shadow-2xl space-y-8 text-white">
+          <div className="flex items-center gap-4">
+            <ShieldCheck size={48} />
             <h4 className="font-serif font-black text-3xl md:text-4xl leading-tight">SOS қорытынды</h4>
           </div>
-          <div className="p-6 bg-white rounded-[32px] border-2 border-red-100 shadow-sm">
-            <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-black mb-4">
-              Оқиғадан кейінгі талдау:
-            </p>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
-              Баланың күйін тұрақтандыру, себептерді анықтау және болашақта алдын алу шаралары.
+          
+          <div className="space-y-6">
+            {SOS_CONTENT.conclusion.principles.map((principle, i) => (
+              <div key={i} className="flex gap-4 items-start bg-white/10 p-6 rounded-3xl backdrop-blur-sm border border-white/20">
+                <CheckCircle2 className="shrink-0 mt-1" size={28} />
+                <p className="text-xl md:text-2xl font-black leading-tight">
+                  {principle}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-8 bg-white rounded-[32px] shadow-inner">
+            <p className="text-xl md:text-2xl text-slate-800 leading-relaxed font-black text-center">
+              {SOS_CONTENT.conclusion.message}
             </p>
           </div>
         </div>
