@@ -510,7 +510,10 @@ export default function App() {
       </nav>
 
       {/* Main Content Area */}
-      <main className="flex-1 p-4 md:p-12 overflow-y-auto pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-12">
+      <main className={cn(
+        "flex-1 p-4 md:p-12 overflow-y-auto pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-12",
+        activeSection === "home" && "snap-y snap-mandatory"
+      )}>
         <AnimatePresence mode="wait">
           <motion.div
             key={activeSection}
