@@ -30,39 +30,39 @@ export default function ExercisesSection() {
   };
 
   return (
-    <div className="space-y-8">
-      <h2 className="section-title">{EXERCISES_CONTENT.title}</h2>
+    <div className="space-y-12 pb-20">
+      <h2 className="text-4xl md:text-5xl font-serif font-black text-brand-olive tracking-tight uppercase">{EXERCISES_CONTENT.title}</h2>
       
-      <div className="bg-brand-cream/30 p-6 rounded-3xl border border-brand-olive/10 space-y-4">
-        <p className="text-slate-600 leading-relaxed">{EXERCISES_CONTENT.intro}</p>
-        <div className="space-y-2">
-          <h4 className="font-bold text-brand-olive flex items-center gap-2">
-            <Play size={18} className="fill-brand-olive" /> Қалай қолдану керек:
+      <div className="bg-brand-cream/30 p-8 rounded-[40px] border border-brand-olive/10 space-y-6">
+        <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">{EXERCISES_CONTENT.intro}</p>
+        <div className="space-y-4">
+          <h4 className="font-black text-brand-olive text-xl md:text-2xl flex items-center gap-3">
+            <Play size={24} className="fill-brand-olive" /> Қалай қолдану керек:
           </h4>
-          <ul className="space-y-2 text-slate-600">
+          <ul className="space-y-4 text-slate-700 text-lg md:text-xl">
             {EXERCISES_CONTENT.usage.map((item, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <span className="text-brand-olive mt-1">✔</span>
-                {item}
+              <li key={i} className="flex items-start gap-3">
+                <span className="text-brand-olive mt-1 font-bold">✔</span>
+                <span className="font-medium">{item}</span>
               </li>
             ))}
           </ul>
         </div>
-        <p className="font-bold text-brand-olive italic text-center py-2 border-y border-brand-olive/10">
+        <p className="font-black text-brand-olive italic text-center py-6 border-y border-brand-olive/10 text-xl md:text-2xl leading-relaxed">
           {EXERCISES_CONTENT.motivation}
         </p>
       </div>
 
-      <div className="bg-orange-50 p-5 rounded-3xl border border-orange-100 flex gap-4 items-start">
-        <div className="bg-orange-500 text-white p-2 rounded-2xl">
-          <AlertCircle size={24} />
+      <div className="bg-orange-50 p-8 rounded-[40px] border border-orange-100 flex flex-col sm:flex-row gap-6 items-start">
+        <div className="bg-orange-500 text-white p-3 rounded-2xl shrink-0">
+          <AlertCircle size={32} />
         </div>
         <div>
-          <h4 className="font-bold text-orange-900 mb-1">{EXERCISES_CONTENT.importantNote.title}</h4>
-          <ul className="text-orange-800 text-sm space-y-1">
+          <h4 className="font-black text-orange-900 text-xl md:text-2xl mb-3">{EXERCISES_CONTENT.importantNote.title}</h4>
+          <ul className="text-orange-800 text-lg md:text-xl space-y-3 font-medium">
             {EXERCISES_CONTENT.importantNote.points.map((p, i) => (
-              <li key={i} className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
+              <li key={i} className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-orange-400 mt-2.5 shrink-0" />
                 {p}
               </li>
             ))}
@@ -70,14 +70,14 @@ export default function ExercisesSection() {
         </div>
       </div>
 
-      <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+      <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
         {categories.map((cat) => (
           <button 
             key={cat} 
             onClick={() => setSelectedCategory(cat)}
             className={cn(
-              "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all",
-              selectedCategory === cat ? "bg-brand-olive text-white shadow-lg shadow-brand-olive/20" : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-100"
+              "px-6 py-3 rounded-full text-base md:text-lg font-black whitespace-nowrap transition-all",
+              selectedCategory === cat ? "bg-brand-olive text-white shadow-xl shadow-brand-olive/20" : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-100"
             )}
           >
             {cat}
@@ -116,23 +116,23 @@ export default function ExercisesSection() {
                 {ex.category}
               </span>
             </div>
-            <div className="p-5">
-              <h3 className="text-xl font-bold mb-2 text-brand-olive">{ex.title}</h3>
-              <p className="text-sm text-slate-500 mb-4 line-clamp-2">{ex.desc}</p>
+            <div className="p-6 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-black mb-3 text-brand-olive leading-tight">{ex.title}</h3>
+              <p className="text-base md:text-lg text-slate-600 mb-6 font-medium leading-relaxed">{ex.desc}</p>
               
-              <div className="bg-slate-50 p-3 rounded-2xl mb-4">
-                <p className="text-[11px] font-medium text-slate-600 text-center italic">
+              <div className="bg-slate-50 p-4 rounded-2xl mb-6">
+                <p className="text-sm md:text-base font-bold text-slate-700 text-center italic leading-relaxed">
                   {EXERCISES_CONTENT.videoSubtitles[idx % EXERCISES_CONTENT.videoSubtitles.length]}
                 </p>
               </div>
-
+              
               <div className="flex items-center justify-between">
-                <span className="text-xs text-slate-400">15 минут • Орташа</span>
+                <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">15 минут • Орташа</span>
                 <button 
                   onClick={() => handleWatch(ex.id)}
-                  className="bg-brand-olive/10 text-brand-olive px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-1 hover:bg-brand-olive hover:text-white transition-colors"
+                  className="bg-brand-olive/10 text-brand-olive px-6 py-3 rounded-2xl font-black text-base md:text-lg flex items-center gap-2 hover:bg-brand-olive hover:text-white transition-all shadow-sm"
                 >
-                  Көру <ChevronRight size={16} />
+                  Көру <ChevronRight size={20} />
                 </button>
               </div>
             </div>
@@ -140,24 +140,24 @@ export default function ExercisesSection() {
         ))}
       </div>
       
-      <div className="space-y-6 mt-12">
-        <h3 className="text-2xl font-bold text-brand-olive border-b border-brand-olive/10 pb-2">Үйде ойналатын ойындар</h3>
-        <div className="grid grid-cols-1 gap-4">
+      <div className="space-y-8 mt-16">
+        <h3 className="text-3xl md:text-4xl font-serif font-black text-brand-olive border-b-4 border-brand-olive/10 pb-4 uppercase tracking-tight">Үйде ойналатын ойындар</h3>
+        <div className="grid grid-cols-1 gap-8">
           {EXERCISES_CONTENT.games.map((game, i) => (
-            <div key={i} className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex justify-between items-start mb-3">
-                <h4 className="font-bold text-brand-olive text-lg">{game.title}</h4>
-                <span className="bg-brand-cream text-brand-olive text-[10px] px-2 py-1 rounded-lg font-bold uppercase">Ойын {i + 1}</span>
+            <div key={i} className="p-8 md:p-10 rounded-[40px] bg-white border border-slate-100 shadow-xl space-y-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                <h4 className="font-black text-brand-olive text-2xl md:text-3xl leading-tight">{game.title}</h4>
+                <span className="bg-brand-cream text-brand-olive text-sm px-4 py-2 rounded-xl font-black uppercase tracking-widest shrink-0">Ойын {i + 1}</span>
               </div>
-              <p className="text-sm text-slate-600 mb-4 bg-brand-cream/20 p-3 rounded-xl">
-                <strong className="text-brand-olive">Мақсат:</strong> {game.goal}
+              <p className="text-lg md:text-xl text-slate-700 bg-brand-cream/30 p-6 rounded-[32px] leading-relaxed font-medium border border-brand-olive/5">
+                <strong className="text-brand-olive font-black block mb-2 text-xl">Мақсат:</strong> {game.goal}
               </p>
-              <div className="space-y-2">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Қалай ойнау керек:</p>
-                <ol className="space-y-2">
+              <div className="space-y-4">
+                <p className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Қалай ойнау керек:</p>
+                <ol className="space-y-4">
                   {game.steps.map((step, j) => (
-                    <li key={j} className="flex gap-3 text-sm text-slate-600">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-olive/10 text-brand-olive flex items-center justify-center text-[10px] font-bold">
+                    <li key={j} className="flex gap-4 text-lg md:text-xl text-slate-700 font-medium leading-relaxed">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-olive/10 text-brand-olive flex items-center justify-center text-sm font-black shadow-inner">
                         {j + 1}
                       </span>
                       {step}
@@ -170,17 +170,17 @@ export default function ExercisesSection() {
         </div>
       </div>
 
-      <div className="bg-brand-olive text-white p-8 rounded-[40px] space-y-6">
-        <div className="flex items-center gap-3">
-          <div className="bg-white/20 p-2 rounded-2xl">
-            <Lightbulb size={24} />
+      <div className="bg-brand-olive text-white p-10 md:p-12 rounded-[50px] space-y-8 shadow-2xl shadow-brand-olive/20">
+        <div className="flex items-center gap-4">
+          <div className="bg-white/20 p-3 rounded-2xl shadow-inner">
+            <Lightbulb size={32} />
           </div>
-          <h3 className="text-2xl font-bold">Пайдалы кеңестер</h3>
+          <h3 className="text-3xl md:text-4xl font-black tracking-tight uppercase">Пайдалы кеңестер</h3>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {EXERCISES_CONTENT.tips.map((tip, i) => (
-            <li key={i} className="bg-white/10 p-4 rounded-2xl flex items-start gap-3 text-sm">
-              <span className="text-brand-cream mt-1">•</span>
+            <li key={i} className="bg-white/10 p-6 rounded-3xl flex items-start gap-4 text-lg md:text-xl font-medium leading-relaxed backdrop-blur-sm">
+              <span className="text-brand-cream mt-1 font-black text-2xl leading-none">•</span>
               {tip}
             </li>
           ))}
