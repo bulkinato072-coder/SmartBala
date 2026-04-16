@@ -444,12 +444,21 @@ export default function ScenarioSection({
         {scenario && (
           <div className="space-y-8 sm:space-y-10">
             <div className="w-full h-64 sm:h-96 overflow-hidden rounded-[32px] sm:rounded-[40px] mb-8 sm:mb-10 bg-slate-100 shadow-inner border-2 sm:border-4 border-white">
-              <img 
-                src={`/${currentDay}.jpg`} 
-                alt={scenario.title} 
-                className="w-full h-full object-contain" 
-                referrerPolicy="no-referrer"
-              />
+              {currentDay <= 25 ? (
+                <video 
+                  src={`/video/${currentDay}.mp4`} 
+                  controls 
+                  className="w-full h-full object-contain"
+                  poster={`/${currentDay}.jpg`}
+                />
+              ) : (
+                <img 
+                  src={`/${currentDay}.jpg`} 
+                  alt={scenario.title} 
+                  className="w-full h-full object-contain" 
+                  referrerPolicy="no-referrer"
+                />
+              )}
             </div>
             <div className="px-5 py-8 sm:p-10 rounded-[40px] sm:rounded-[48px] bg-brand-cream/30 border-2 border-brand-olive/10 space-y-8 sm:space-y-10 shadow-sm">
               <h3 className="text-2xl sm:text-4xl font-black text-brand-olive leading-tight">
